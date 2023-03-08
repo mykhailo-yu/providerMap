@@ -1,0 +1,68 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+}
+
+
+.main {
+    width: 80vw;
+    margin: 0 auto;
+}
+
+.map {
+    &-picture {
+        width: 100%;
+    }
+
+    position: relative;
+}
+
+.man {
+    position: absolute;
+    display: flex;
+    height: 9%;
+    align-items: end;
+
+    img {
+        height: 100%;
+    }
+
+    &-small {
+        height: 40%;
+    }
+
+    &-medium {
+        height: 70%;
+    }
+
+    &-big {
+        height: 100%;
+    }
+
+    &-northAmerica {
+        top: 37%;
+        left: 20%;
+    }
+
+    &-southAmerica {
+        top: 65%;
+        left: 30%;
+    }
+
+    &-europe {
+        top: 34%;
+        left: 50%;
+    }
+
+    &-asia {
+        top: 46%;
+        right: 23%;
+    }
+
+    &-australia {
+        bottom: 17%;
+        right: 14%;
+    }
+}

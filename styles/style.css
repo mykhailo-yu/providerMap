@@ -1,0 +1,54 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+}
+.main {
+  width: 80vw;
+  margin: 0 auto;
+}
+.map {
+  position: relative;
+}
+.map-picture {
+  width: 100%;
+}
+.man {
+  position: absolute;
+  display: flex;
+  height: 9%;
+  align-items: end;
+}
+.man img {
+  height: 100%;
+}
+.man-small {
+  height: 40%;
+}
+.man-medium {
+  height: 70%;
+}
+.man-big {
+  height: 100%;
+}
+.man-northAmerica {
+  top: 37%;
+  left: 20%;
+}
+.man-southAmerica {
+  top: 65%;
+  left: 30%;
+}
+.man-europe {
+  top: 34%;
+  left: 50%;
+}
+.man-asia {
+  top: 46%;
+  right: 23%;
+}
+.man-australia {
+  bottom: 17%;
+  right: 14%;
+}
