@@ -14,11 +14,14 @@
 .map-picture {
   width: 100%;
 }
+.mans {
+  display: none;
+}
 .man {
   position: absolute;
   display: flex;
   height: 9%;
-  align-items: end;
+  align-items: baseline;
 }
 .man img {
   height: 100%;
@@ -29,7 +32,7 @@
 .man-medium {
   height: 70%;
 }
-.man-big {
+.man-large {
   height: 100%;
 }
 .man-northAmerica {
@@ -51,4 +54,71 @@
 .man-australia {
   bottom: 17%;
   right: 14%;
+}
+.devices .device {
+  position: absolute;
+  height: 6%;
+}
+.devices .device img {
+  height: 100%;
+}
+.devices-northAmerica .device-small {
+  top: 37%;
+  left: 15%;
+}
+.devices-northAmerica .device-medium {
+  top: 42%;
+  left: 20%;
+}
+.devices-northAmerica .device-large {
+  top: 37%;
+  left: 26%;
+}
+.devices-southAmerica .device-small {
+  bottom: 27%;
+  left: 28%;
+}
+.devices-southAmerica .device-medium {
+  bottom: 17%;
+  left: 31%;
+}
+.devices-southAmerica .device-large {
+  bottom: 24%;
+  left: 33%;
+}
+.devices-europe .device-small {
+  top: 33%;
+  left: 58%;
+}
+.devices-europe .device-medium {
+  top: 42%;
+  left: 45%;
+}
+.devices-europe .device-large {
+  top: 38%;
+  left: 52%;
+}
+.devices-asia .device-small {
+  top: 39%;
+  left: 80%;
+}
+.devices-asia .device-medium {
+  top: 51%;
+  left: 67%;
+}
+.devices-asia .device-large {
+  top: 49%;
+  left: 75%;
+}
+.devices-australia .device-small {
+  bottom: 17%;
+  right: 15%;
+}
+.devices-australia .device-medium {
+  bottom: 17%;
+  right: 19%;
+}
+.devices-australia .device-large {
+  bottom: 17%;
+  right: 11%;
 }

@@ -19,11 +19,15 @@
     position: relative;
 }
 
+.mans {
+    display: none;
+}
+
 .man {
     position: absolute;
     display: flex;
     height: 9%;
-    align-items: end;
+    align-items: baseline;
 
     img {
         height: 100%;
@@ -37,7 +41,7 @@
         height: 70%;
     }
 
-    &-big {
+    &-large {
         height: 100%;
     }
 
@@ -64,5 +68,101 @@
     &-australia {
         bottom: 17%;
         right: 14%;
+    }
+}
+
+.devices {
+    .device {
+        position: absolute;
+        height: 6%;
+
+        img {
+            height: 100%;
+        }
+    }
+
+    &-northAmerica {
+        .device-small {
+            top: 37%;
+            left: 15%;
+        }
+
+        .device-medium {
+            top: 42%;
+            left: 20%;
+        }
+
+        .device-large {
+            top: 37%;
+            left: 26%;
+        }
+    }
+
+    &-southAmerica {
+        .device-small {
+            bottom: 27%;
+            left: 28%;
+        }
+
+        .device-medium {
+            bottom: 17%;
+            left: 31%;
+        }
+
+        .device-large {
+            bottom: 24%;
+            left: 33%;
+        }
+    }
+
+    &-europe {
+        .device-small {
+            top: 33%;
+            left: 58%;
+        }
+
+        .device-medium {
+            top: 42%;
+            left: 45%;
+        }
+
+        .device-large {
+            top: 38%;
+            left: 52%;
+        }
+    }
+
+    &-asia {
+        .device-small {
+            top: 39%;
+            left: 80%;
+        }
+
+        .device-medium {
+            top: 51%;
+            left: 67%;
+        }
+
+        .device-large {
+            top: 49%;
+            left: 75%;
+        }
+    }
+
+    &-australia {
+        .device-small {
+            bottom: 17%;
+            right: 15%;
+        }
+
+        .device-medium {
+            bottom: 17%;
+            right: 19%;
+        }
+
+        .device-large {
+            bottom: 17%;
+            right: 11%;
+        }
     }
 }
