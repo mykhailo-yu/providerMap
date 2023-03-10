@@ -19,15 +19,16 @@
     position: relative;
 }
 
-.mans {
-    display: none;
-}
 
 .man {
     position: absolute;
     display: flex;
     height: 9%;
     align-items: baseline;
+
+    &:hover {
+        cursor: pointer;
+    }
 
     img {
         height: 100%;
@@ -72,10 +73,8 @@
 }
 
 .devices {
-    //display: none;
-
-
     .device {
+        display: none;
         position: absolute;
         height: 6%;
         z-index: 2;
@@ -205,22 +204,6 @@
 
         &:hover {
             cursor: pointer;
-        }
-
-        &-img {
-            //display: none;
-        }
-
-        &_ByteCloud {
-            display: none;
-        }
-
-        .circle-empty {
-            display: none;
-        }
-
-        .circle-filled {
-            display: none;
         }
     }
 }

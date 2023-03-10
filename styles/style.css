@@ -14,14 +14,14 @@
 .map-picture {
   width: 100%;
 }
-.mans {
-  display: none;
-}
 .man {
   position: absolute;
   display: flex;
   height: 9%;
   align-items: baseline;
+}
+.man:hover {
+  cursor: pointer;
 }
 .man img {
   height: 100%;
@@ -56,6 +56,7 @@
   right: 14%;
 }
 .devices .device {
+  display: none;
   position: absolute;
   height: 6%;
   z-index: 2;
@@ -149,15 +150,6 @@
 }
 .servers .server:hover {
   cursor: pointer;
-}
-.servers .server_ByteCloud {
-  display: none;
-}
-.servers .server .circle-empty {
-  display: none;
-}
-.servers .server .circle-filled {
-  display: none;
 }
 .arcs-server-northAmerica-1 {
   display: none;
