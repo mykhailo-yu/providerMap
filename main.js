@@ -199,49 +199,49 @@ function byteCloudArcShow(clients, servers) {
                 else if (clients[client] == 2) { createByteCloudArcName(client, 2, server); }
                 else if (clients[client] == 3) { createByteCloudArcName(client, 3, server); }
             }
-            if (server == "west-usa_" && servers[server] > 0 && client == "south-america_" && clients[client] > 0) {
+            else if (server == "west-usa_" && servers[server] > 0 && client == "south-america_" && clients[client] > 0) {
                 if (clients[client] == 1) { createByteCloudArcName(client, 1, server); }
                 else if (clients[client] == 2) { createByteCloudArcName(client, 2, server); }
                 else if (clients[client] == 3) { createByteCloudArcName(client, 3, server); }
             }
-            if (server == "germany_" && servers[server] > 0 && client == "europe_" && clients[client] > 0) {
+            else if (server == "germany_" && servers[server] > 0 && client == "europe_" && clients[client] > 0) {
                 if (clients[client] == 1) { createByteCloudArcName(client, 1, server); }
                 else if (clients[client] == 2) { createByteCloudArcName(client, 2, server); }
                 else if (clients[client] == 3) { createByteCloudArcName(client, 3, server); }
             }
-            if (server == "singapore_" && servers[server] > 0 && client == "asia_" && clients[client] > 0) {
+            else if (server == "singapore_" && servers[server] > 0 && client == "asia_" && clients[client] > 0) {
                 if (clients[client] == 1) { createByteCloudArcName(client, 1, server); }
                 else if (clients[client] == 2) { createByteCloudArcName(client, 2, server); }
                 else if (clients[client] == 3) { createByteCloudArcName(client, 3, server); }
             }
-            if (server == "singapore_" && servers[server] > 0 && client == "oceania_" && clients[client] > 0) {
+            else if (server == "singapore_" && servers[server] > 0 && client == "oceania_" && clients[client] > 0) {
                 if (clients[client] == 1) { createByteCloudArcName(client, 1, server); }
                 else if (clients[client] == 2) { createByteCloudArcName(client, 2, server); }
                 else if (clients[client] == 3) { createByteCloudArcName(client, 3, server); }
             }
             ////////////////////////////////
-            if (server == "east-usa_" && servers[server] == 0 && servers["west-usa_"] == 1 && client == "north-america_" && clients[client] > 0) {
+            else if (server == "east-usa_" && servers[server] == 0 && servers["west-usa_"] == 1 && client == "north-america_" && clients[client] > 0) {
                 if (clients[client] == 1) { createByteCloudArcName(client, 1, "west-usa_"); }
                 else if (clients[client] == 2) { createByteCloudArcName(client, 2, "west-usa_"); }
                 else if (clients[client] == 3) { createByteCloudArcName(client, 3, "west-usa_"); }
             }
-            if (server == "west-usa_" && servers[server] == 0 && servers["east-usa_"] == 1 && client == "south-america_" && clients[client] > 0) {
+            else if (server == "west-usa_" && servers[server] == 0 && servers["east-usa_"] == 1 && client == "south-america_" && clients[client] > 0) {
                 console.log(servers["east-usa_"]);
                 if (clients[client] == 1) { createByteCloudArcName(client, 1, "east-usa_"); }
                 else if (clients[client] == 2) { createByteCloudArcName(client, 2, "east-usa_"); }
                 else if (clients[client] == 3) { createByteCloudArcName(client, 3, "east-usa_"); }
             }
-            if (server == "germany_" && servers[server] == 0 && servers["singapore_"] == 1 && client == "europe_" && clients[client] > 0) {
+            else if (server == "germany_" && servers[server] == 0 && servers["singapore_"] == 1 && client == "europe_" && clients[client] > 0) {
                 if (clients[client] == 1) { createByteCloudArcName(client, 1, "singapore_"); }
                 else if (clients[client] == 2) { createByteCloudArcName(client, 2, "singapore_"); }
                 else if (clients[client] == 3) { createByteCloudArcName(client, 3, "singapore_"); }
             }
-            if (server == "singapore_" && servers[server] == 0 && servers["germany_"] == 1 && client == "oceania_" && clients[client] > 0) {
+            else if (server == "singapore_" && servers[server] == 0 && servers["germany_"] == 1 && client == "oceania_" && clients[client] > 0) {
                 if (clients[client] == 1) { createByteCloudArcName(client, 1, "germany_"); }
                 else if (clients[client] == 2) { createByteCloudArcName(client, 2, "germany_"); }
                 else if (clients[client] == 3) { createByteCloudArcName(client, 3, "germany_"); }
             }
-            if (server == "singapore_" && servers[server] == 0 && servers["germany_"] == 1 && client == "asia_" && clients[client] > 0) {
+            else if (server == "singapore_" && servers[server] == 0 && servers["germany_"] == 1 && client == "asia_" && clients[client] > 0) {
                 if (clients[client] == 1) { createByteCloudArcName(client, 1, "germany_"); }
                 else if (clients[client] == 2) { createByteCloudArcName(client, 2, "germany_"); }
                 else if (clients[client] == 3) { createByteCloudArcName(client, 3, "germany_"); }
