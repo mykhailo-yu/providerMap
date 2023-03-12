@@ -8,6 +8,9 @@
   width: 80vw;
   margin: 0 auto;
 }
+.main .text {
+  font-size: 2vw;
+}
 .map {
   position: relative;
 }
@@ -65,8 +68,8 @@
   height: 100%;
 }
 .devices-northAmerica .device-small {
-  top: 37%;
-  left: 15%;
+  top: 39%;
+  left: 16%;
 }
 .devices-northAmerica .device-medium {
   top: 42%;
@@ -110,7 +113,7 @@
 }
 .devices-asia .device-large {
   top: 49%;
-  left: 75%;
+  left: 76%;
 }
 .devices-australia .device-small {
   bottom: 17%;
@@ -123,6 +126,9 @@
 .devices-australia .device-large {
   bottom: 17%;
   right: 11%;
+}
+.servers {
+  display: none;
 }
 .servers .server {
   z-index: 2;
@@ -151,16 +157,16 @@
 .servers .server:hover {
   cursor: pointer;
 }
-.arcs-server-northAmerica-1 {
+.arcs-server-northAmerica-1 > div {
   display: none;
 }
-.arcs-server-northAmerica-2 {
+.arcs-server-northAmerica-2 > div {
   display: none;
 }
-.arcs-server-europe {
+.arcs-server-europe > div {
   display: none;
 }
-.arcs-server-asia {
+.arcs-server-asia > div {
   display: none;
 }
 .arc {

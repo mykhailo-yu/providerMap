@@ -12,12 +12,14 @@
 <body>
     <div class="wrapper">
         <div class="main">
-            <div class="text">Where are your users? Choose the number for every region. <a href="">Next</a></div>
+            <div class="text">Where are your users? Choose the number for every region.
+                <a href="javascript:void(0);" onclick="nextStep()">Next</a>
+            </div>
             <div class="map">
                 <img class="map-picture" src="img/map.png" alt="">
                 <div class="north-America">
                     <div class="mans">
-                        <div class="man man-northAmerica">
+                        <div class="man man-northAmerica north-america_">
                             <div class="man-small">
                                 <img src="img/man_empty.png" alt="number of clients">
                             </div>
@@ -45,7 +47,7 @@
                 </div>
                 <div class="southAmerica">
                     <div class="mans">
-                        <div class="man man-southAmerica">
+                        <div class="man man-southAmerica south-america_">
                             <div class="man-small">
                                 <img src="img/man_empty.png" alt="number of clients">
                             </div>
@@ -73,7 +75,7 @@
                 </div>
                 <div class="europe">
                     <div class="mans">
-                        <div class="man man-europe">
+                        <div class="man man-europe europe_">
                             <div class="man-small">
                                 <img src="img/man_empty.png" alt="number of clients">
                             </div>
@@ -101,7 +103,7 @@
                 </div>
                 <div class="asia">
                     <div class="mans">
-                        <div class="man man-asia">
+                        <div class="man man-asia asia_">
                             <div class="man-small">
                                 <img src="img/man_empty.png" alt="number of clients">
                             </div>
@@ -129,7 +131,7 @@
                 </div>
                 <div class="australia">
                     <div class="mans">
-                        <div class="man man-australia">
+                        <div class="man man-australia oceania_">
                             <div class="man-small">
                                 <img src="img/man_empty.png" alt="number of clients">
                             </div>
@@ -156,21 +158,20 @@
                     </div>
                 </div>
                 <div class="servers">
-                    <div class="server server-northAmerica-1">
+                    <div class="server server-northAmerica-1 west-usa_">
                         <img src="/img/circle_empty.png" alt="">
                     </div>
-                    <div class="server server-northAmerica-2">
+                    <div class="server server-northAmerica-2 east-usa_">
                         <img src="/img/circle_empty.png" alt="">
                     </div>
-                    <div class="server server-europe">
+                    <div class="server server-europe germany_">
                         <img src="/img/circle_empty.png" alt="">
                     </div>
-                    <div class="server server-asia">
+                    <div class="server server-asia singapore_">
                         <img src="/img/circle_empty.png" alt="">
                     </div>
                 </div>
                 <div class="arcs">
-                    <!--Arcs which starts from clients server-->
                     <div class="arcs-server-northAmerica-1">
                         <!-- West Usa --- Asia-->
                         <div class="arc arc_west-usa_asia_large">
@@ -269,7 +270,7 @@
                             <img src="img/arc_east-usa_south-america_large.png" alt="">
                         </div>
                         <div class="arc arc_east-usa_south-america_medium">
-                            <img src="img/arc_east-usa_asia_medium.png" alt="">
+                            <img src="img/arc_east-usa_south-america_medium.png" alt="">
                         </div>
                         <div class="arc arc_east-usa_south-america_small">
                             <img src="img/arc_east-usa_south-america_small.png" alt="">
@@ -333,50 +334,50 @@
                         <div class="arc arc_singapore_asia_large">
                             <img src="img/arc_singapore_asia_large.png" alt="">
                         </div>
-                        <div class="arc arc_singapore_asia_large">
+                        <div class="arc arc_singapore_asia_medium">
                             <img src="img/arc_singapore_asia_medium.png" alt="">
                         </div>
-                        <div class="arc arc_singapore_asia_large">
+                        <div class="arc arc_singapore_asia_small">
                             <img src="img/arc_singapore_asia_small.png" alt="">
                         </div>
                         <!-- Singapore --- Europe-->
                         <div class="arc arc_singapore_europe_large">
                             <img src="img/arc_singapore_europe_large.png" alt="">
                         </div>
-                        <div class="arc arc_singapore_europe_large">
+                        <div class="arc arc_singapore_europe_medium">
                             <img src="img/arc_singapore_europe_medium.png" alt="">
                         </div>
-                        <div class="arc arc_singapore_europe_large">
+                        <div class="arc arc_singapore_europe_small">
                             <img src="img/arc_singapore_europe_small.png" alt="">
                         </div>
                         <!-- Singapore --- North America-->
                         <div class="arc arc_singapore_north-america_large">
                             <img src="img/arc_singapore_north-america_large.png" alt="">
                         </div>
-                        <div class="arc arc_singapore_north-america_large">
+                        <div class="arc arc_singapore_north-america_medium">
                             <img src="img/arc_singapore_north-america_medium.png" alt="">
                         </div>
-                        <div class="arc arc_singapore_north-america_large">
+                        <div class="arc arc_singapore_north-america_small">
                             <img src="img/arc_singapore_north-america_small.png" alt="">
                         </div>
                         <!-- Singapore --- Oceania-->
                         <div class="arc arc_singapore_oceania_large">
                             <img src="img/arc_singapore_oceania_large.png" alt="">
                         </div>
-                        <div class="arc arc_singapore_oceania_large">
+                        <div class="arc arc_singapore_oceania_medium">
                             <img src="img/arc_singapore_oceania_medium.png" alt="">
                         </div>
-                        <div class="arc arc_singapore_oceania_large">
+                        <div class="arc arc_singapore_oceania_small">
                             <img src="img/arc_singapore_oceania_small.png" alt="">
                         </div>
                         <!-- Singapore --- South America-->
                         <div class="arc arc_singapore_south-america_large">
                             <img src="img/arc_singapore_south-america_large.png" alt="">
                         </div>
-                        <div class="arc arc_singapore_south-america_large">
+                        <div class="arc arc_singapore_south-america_medium">
                             <img src="img/arc_singapore_south-america_medium.png" alt="">
                         </div>
-                        <div class="arc arc_singapore_south-america_large">
+                        <div class="arc arc_singapore_south-america_small">
                             <img src="img/arc_singapore_south-america_small.png" alt="">
                         </div>
                     </div>
