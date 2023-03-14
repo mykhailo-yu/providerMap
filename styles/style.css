@@ -64,66 +64,96 @@
   height: 6%;
   z-index: 2;
 }
+.devices .device_screen-wrapper {
+  position: relative;
+  height: 100%;
+}
+.devices .device .screen {
+  position: absolute;
+  transition: width 0.5s ease-in-out;
+  background-color: #1528d3;
+}
+.devices .device-small .screen {
+  top: 28%;
+  left: 34%;
+  width: 0%;
+  height: 21%;
+}
+.devices .device-medium .screen {
+  top: 15%;
+  left: 26%;
+  width: 0%;
+  height: 70%;
+}
+.devices .device-large .screen {
+  top: 22%;
+  left: 11%;
+  width: 0%;
+  height: 47%;
+}
+.devices .device:hover .screen {
+  width: 0px;
+}
 .devices .device img {
   height: 100%;
 }
-.devices-northAmerica .device-small {
+.devices-north-america_ .device-small {
   top: 39%;
   left: 16%;
 }
-.devices-northAmerica .device-medium {
+.devices-north-america_ .device-medium {
   top: 42%;
   left: 20%;
 }
-.devices-northAmerica .device-large {
+.devices-north-america_ .device-large {
   top: 38%;
   left: 24%;
 }
-.devices-southAmerica .device-small {
+.devices-south-america_ .device-small {
   bottom: 27%;
   left: 28%;
 }
-.devices-southAmerica .device-medium {
+.devices-south-america_ .device-medium {
   bottom: 17%;
   left: 31%;
 }
-.devices-southAmerica .device-large {
+.devices-south-america_ .device-large {
   bottom: 24%;
   left: 33%;
 }
-.devices-europe .device-small {
+.devices-europe_ .device-small {
   top: 33%;
   left: 58%;
 }
-.devices-europe .device-medium {
+.devices-europe_ .device-medium {
   top: 42%;
   left: 45%;
 }
-.devices-europe .device-large {
+.devices-europe_ .device-large {
   top: 38%;
   left: 52%;
 }
-.devices-asia .device-small {
+.devices-asia_ .device-small {
   top: 39%;
   left: 80%;
 }
-.devices-asia .device-medium {
+.devices-asia_ .device-medium {
   top: 51%;
   left: 67%;
 }
-.devices-asia .device-large {
+.devices-asia_ .device-large {
   top: 49%;
   left: 76%;
 }
-.devices-australia .device-small {
+.devices-oceania_ .device-small {
   bottom: 17%;
   right: 15%;
 }
-.devices-australia .device-medium {
+.devices-oceania_ .device-medium {
   bottom: 17%;
   right: 19%;
 }
-.devices-australia .device-large {
+.devices-oceania_ .device-large {
   bottom: 17%;
   right: 11%;
 }
@@ -178,4 +208,31 @@
 .arc img {
   width: 100%;
   height: 100%;
+}
+.info-text {
+  display: none;
+  position: absolute;
+  background-color: #8ad1d1;
+  padding: 4px;
+  border-radius: 4px;
+}
+.info-text_northAmerica_ {
+  top: 50%;
+  left: 23%;
+}
+.info-text_southAmerica_ {
+  top: 83%;
+  left: 24%;
+}
+.info-text_europe_ {
+  top: 48%;
+  left: 50%;
+}
+.info-text_asia_ {
+  top: 58%;
+  left: 72%;
+}
+.info-text_australia_ {
+  top: 72%;
+  left: 86%;
 }
