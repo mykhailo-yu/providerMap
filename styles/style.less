@@ -8,6 +8,7 @@
 
 .wrapper {
     position: relative;
+    overflow-x: hidden;
 }
 
 .portrait {
@@ -334,7 +335,7 @@
     left: 0;
     background-color: rgba(0, 0, 0, 0.3);
     width: 100vw;
-    min-height: 100vh;
+    min-height: 100%;
     overflow: hidden;
     display: none;
     z-index: 99;
@@ -427,7 +428,7 @@
     .portrait {
         display: block;
         width: 100vw;
-        height: 100vh;
+        min-height: 100vh;
         background-image: url(../img/rotateYourPhone.png);
         background-repeat: no-repeat;
         background-position: center;
