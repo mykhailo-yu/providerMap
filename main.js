@@ -226,35 +226,35 @@ function byteCloudArcShow(clients, servers) {
                 clientQuantitySelect(client, server, path);
                 infoTextNorthAmerica.style.display = "block"
                 infoTextNorthAmerica.innerHTML = `Latency: ${path}ms`;
-                setTimeout(() => { infoTextNorthAmerica.innerHTML = `Time: ${path * 10}ms` }, durationCutter(path) * 100);
+                setTimeout(() => { infoTextNorthAmerica.innerHTML = `Time: ${path / 10}s` }, durationCutter(path) * 100);
             }
             else if (server == "west-usa_" && servers[server] > 0 && client == "south-america_" && clients[client] > 0) {
                 let path = pings["wna-sa"];
                 clientQuantitySelect(client, server, path);
                 infoTextSouthAmerica.style.display = "block"
                 infoTextSouthAmerica.innerHTML = `Latency: ${path}ms`;
-                setTimeout(() => { infoTextSouthAmerica.innerHTML = `Time: ${path * 10}ms` }, durationCutter(path) * 100);
+                setTimeout(() => { infoTextSouthAmerica.innerHTML = `Time: ${path / 10}s` }, durationCutter(path) * 100);
             }
             else if (server == "germany_" && servers[server] > 0 && client == "europe_" && clients[client] > 0) {
                 let path = pings["eu-eu"];
                 clientQuantitySelect(client, server, path);
                 infoTextEurope.style.display = "block"
                 infoTextEurope.innerHTML = `Latency: ${path}ms`;
-                setTimeout(() => { infoTextEurope.innerHTML = `Time: ${path * 10}ms` }, durationCutter(path) * 100);
+                setTimeout(() => { infoTextEurope.innerHTML = `Time: ${path / 10}s` }, durationCutter(path) * 100);
             }
             else if (server == "singapore_" && servers[server] > 0 && client == "asia_" && clients[client] > 0) {
                 let path = pings["oc-as"];
                 clientQuantitySelect(client, server, path);
                 infoTextAsia.style.display = "block"
                 infoTextAsia.innerHTML = `Latency: ${path}ms`;
-                setTimeout(() => { infoTextAsia.innerHTML = `Time: ${path * 10}ms` }, durationCutter(path) * 100);
+                setTimeout(() => { infoTextAsia.innerHTML = `Time: ${path / 10}s` }, durationCutter(path) * 100);
             }
             else if (server == "singapore_" && servers[server] > 0 && client == "oceania_" && clients[client] > 0) {
                 let path = pings["oc-au"];
                 clientQuantitySelect(client, server, path);
                 infoTextAustralia.style.display = "block"
                 infoTextAustralia.innerHTML = `Latency: ${path}ms`;
-                setTimeout(() => { infoTextAustralia.innerHTML = `Time: ${path * 10}ms` }, durationCutter(path) * 100);
+                setTimeout(() => { infoTextAustralia.innerHTML = `Time: ${path / 10}s` }, durationCutter(path) * 100);
             }
             /*/////////////////////*/
             else if (server == "east-usa_" && servers[server] == 0 && servers["west-usa_"] > 0 && client == "north-america_" && clients[client] > 0) {
@@ -262,35 +262,35 @@ function byteCloudArcShow(clients, servers) {
                 clientQuantitySelect(client, "west-usa_", path);
                 infoTextNorthAmerica.style.display = "block"
                 infoTextNorthAmerica.innerHTML = `Latency: ${path}ms`;
-                setTimeout(() => { infoTextNorthAmerica.innerHTML = `Time: ${path * 10}ms` }, durationCutter(path) * 100);
+                setTimeout(() => { infoTextNorthAmerica.innerHTML = `Time: ${path / 10}s` }, durationCutter(path) * 100);
             }
             else if (server == "west-usa_" && servers[server] == 0 && servers["east-usa_"] > 0 && client == "south-america_" && clients[client] > 0) {
                 let path = pings["ena-sa"];
                 clientQuantitySelect(client, "east-usa_", path);
                 infoTextSouthAmerica.style.display = "block"
                 infoTextSouthAmerica.innerHTML = `Latency: ${path}ms`;
-                setTimeout(() => { infoTextSouthAmerica.innerHTML = `Time: ${path * 10}ms` }, durationCutter(path) * 100);
+                setTimeout(() => { infoTextSouthAmerica.innerHTML = `Time: ${path / 10}s` }, durationCutter(path) * 100);
             }
             else if (server == "germany_" && servers[server] == 0 && servers["east-usa_"] > 0 && client == "europe_" && clients[client] > 0) {
                 let path = pings["ena-eu"];
                 clientQuantitySelect(client, "east-usa_", path);
                 infoTextEurope.style.display = "block"
                 infoTextEurope.innerHTML = `Latency: ${path}ms`;
-                setTimeout(() => { infoTextEurope.innerHTML = `Time: ${path * 10}ms` }, durationCutter(path) * 100);
+                setTimeout(() => { infoTextEurope.innerHTML = `Time: ${path / 10}s` }, durationCutter(path) * 100);
             }
             else if (server == "singapore_" && servers[server] == 0 && servers["germany_"] > 0 && client == "oceania_" && clients[client] > 0) {
                 let path = pings["eu-au"];
                 clientQuantitySelect(client, "germany_", path);
                 infoTextAustralia.style.display = "block"
                 infoTextAustralia.innerHTML = `Latency: ${path}ms`;
-                setTimeout(() => { infoTextAustralia.innerHTML = `Time: ${path * 10}ms` }, durationCutter(path) * 100);
+                setTimeout(() => { infoTextAustralia.innerHTML = `Time: ${path / 10}s` }, durationCutter(path) * 100);
             }
             else if (server == "singapore_" && servers[server] == 0 && servers["germany_"] > 0 && client == "asia_" && clients[client] > 0) {
                 let path = pings["eu-as"];
                 clientQuantitySelect(client, "germany_", path);
                 infoTextAsia.style.display = "block"
                 infoTextAsia.innerHTML = `Latency: ${path}ms`;
-                setTimeout(() => { infoTextAsia.innerHTML = `Time: ${path * 10}ms` }, durationCutter(path) * 100);
+                setTimeout(() => { infoTextAsia.innerHTML = `Time: ${path / 10}s` }, durationCutter(path) * 100);
             }
         }
     }
@@ -370,7 +370,7 @@ function durationCutter(duration) {
 function showText(text, duration) {
     text.style.visibility = "visible";
     text.innerHTML = `Latency: ${duration}ms`;
-    setTimeout(() => { text.innerHTML = `Time: ${duration * 10}ms` }, durationCutter(duration) * 100);
+    setTimeout(() => { text.innerHTML = `Time: ${duration / 10}s` }, durationCutter(duration) * 100);
 }
 // Function for creating final results
 function createResult(element, client, latency) {
