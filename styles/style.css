@@ -8,6 +8,9 @@
 .wrapper {
   position: relative;
 }
+.portrait {
+  display: none;
+}
 .main {
   width: 80vw;
   margin: 0 auto;
@@ -81,6 +84,7 @@
   position: absolute;
   transition: width 0.5s ease-in-out;
   background-color: #1528d3;
+  border-radius: 2px;
 }
 .devices .device-small .screen {
   top: 28%;
@@ -90,7 +94,7 @@
 }
 .devices .device-medium .screen {
   top: 15%;
-  left: 26%;
+  left: 25%;
   width: 0%;
   height: 70%;
 }
@@ -224,13 +228,14 @@
   background-color: #bce4a2;
   padding: 4px;
   border-radius: 4px;
+  font-size: 1vw;
 }
 .info-text_northAmerica_ {
   top: 50%;
   left: 23%;
 }
 .info-text_southAmerica_ {
-  top: 83%;
+  top: 84%;
   left: 24%;
 }
 .info-text_europe_ {
@@ -242,8 +247,8 @@
   left: 72%;
 }
 .info-text_australia_ {
-  top: 72%;
-  left: 86%;
+  top: 84%;
+  left: 78%;
 }
 .result-table-wrapper {
   position: absolute;
@@ -319,4 +324,24 @@
 }
 .result-table-inner .item .quality {
   flex-grow: 1;
+}
+@media (orientation: portrait) {
+  .main {
+    display: none;
+  }
+  .portrait {
+    display: block;
+    width: 100vw;
+    height: 100vh;
+    background-image: url(../img/rotateYourPhone.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+  }
+}
+@media (max-width: 968px) {
+  .result-table-inner .item .header img {
+    width: 14%;
+  }
 }

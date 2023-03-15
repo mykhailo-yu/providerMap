@@ -34,13 +34,11 @@ let pings = {
     "ena-na": 21, "ena-sa": 139, "ena-eu": 97, "ena-as": 232, "ena-au": 207,
     "oc-na": 226, "oc-sa": 367, "oc-eu": 250, "oc-as": 70, "oc-au": 92
 }
-let text1 = () => {
-    text.innerHTML = "Where is your data? Choose one spot for Object Storage System";
-}
+let text1 = () => { text.innerHTML = "Where is your data? Choose one spot for Object Storage System"; }
 let text2 = () => {
     text.innerHTML = "Choose minimum two additional spots for ByteCloud and press <a class='startLink' onclick='nextStep()' style='color: rgb(98, 155, 240);'>Start</a>";
-
 }
+// Adding event listeners for mans
 for (const manSmall of mansSmall) {
     manSmall.addEventListener("mouseover", (event) => {
         event.target.src = manFilledPicture;
@@ -98,6 +96,7 @@ for (const manLarge of mansLarge) {
         if (clientCounter == 5) { nextStep(); }
     })
 }
+// Adding event listeners for servers
 for (const server of servers) {
     const mouseoverHandler = (event) => {
         event.target.src = circleFilledPicture;
@@ -133,6 +132,7 @@ for (const server of servers) {
     server.addEventListener("mouseout", mouseoutHandler);
     server.addEventListener("click", clickHandler);
 }
+// Function for creating arc name and results for object storage
 function arcShow(clients, servers) {
     let arcNameStart = "arc_";
     let arcName = [];
@@ -197,6 +197,7 @@ function arcShow(clients, servers) {
     showArc(arcName);
     setTimeout(() => { nextStep() }, 5500);
 }
+// Function to calculate name elements for arcs and to create results for Byte Cloud storage
 function byteCloudArcShow(clients, servers) {
     function clientQuantitySelect(client, server, path) {
         if (clients[client] == 1) {
@@ -295,6 +296,7 @@ function byteCloudArcShow(clients, servers) {
     }
     setTimeout(() => { nextStep() }, 5500);
 }
+// Function to make visible the required arcs
 function showArc(arcName) {
     for (const arc of arcName) {
         let a = document.querySelector(`.${arc}`);
@@ -303,6 +305,7 @@ function showArc(arcName) {
         }
     }
 }
+// Function to create ByteCloud arcs
 function createByteCloudArcName(client, clientCount, server) {
     let arcName = [];
     let arcNameStart = "arc_";
@@ -320,11 +323,13 @@ function createByteCloudArcName(client, clientCount, server) {
     }
     showArc(arcName);
 }
+// Function to hide all arcs
 function arcHide(arcs) {
     for (const arc of arcs) {
         arc.style.display = "none";
     }
 }
+// Function to add animation for screens
 function anim(element, quantity, duration) {
     let small = element.querySelector('.device-small .screen')
     let medium = element.querySelector('.device-medium .screen')
@@ -354,82 +359,20 @@ function anim(element, quantity, duration) {
         }
         default: break;
     }
-
-
 }
+// Function to decrease duration of animation if it is big, and to increase duration if it is short
 function durationCutter(duration) {
     if (duration > 50) return 50;
     else if (duration < 10) return 10;
     else return duration;
 }
-function nextStep() {
-    switch (stepCounter) {
-        case 0: {
-            if (clientCounter == 0) {
-                servers[0].parentNode.style.display = "block";
-                for (const man of mans) {
-                    man.style.display = "none";
-                }
-                for (const device of devices) {
-                    device.style.display = "block";
-                }
-                for (const key in checkedClients) {
-                    checkedClients[key] = 3;
-                }
-            }
-            else {
-                servers[0].parentNode.style.display = "block";
-                for (const man of mans) {
-                    man.style.display = "none";
-                }
-            }
-            text1();
-            stepCounter++;
-            break;
-        }
-        case 1: {
-            if (serverCounter < 2) break;
-            for (const server of servers) {
-                if (server.firstElementChild.src.includes(circleEmptyPicture)) {
-                    server.style.display = "none"
-                }
-            }
-            text.style.visibility = "hidden";
-            byteCloudArcShow(checkedClients, checkedServers);
-            stepCounter++;
-            break;
-        }
-        case 2: {
-            arcHide(arcs);
-            for (const screen of screens) {
-                screen.style.transitionDuration = "0s"
-                screen.style.width = "0%";
-            }
-            for (const item of infoText) {
-                item.style.visibility = "hidden";
-            }
-            setTimeout(() => {
-                arcShow(checkedClients, checkedServers);
-            }, 1500)
-            stepCounter++;
-            break;
-        }
-        case 3: {
-            result.style.display = "block";
-            stepCounter++;
-            break;
-        }
-        default: {
-            break;
-        }
-    }
-
-}
+// Function to make visible text with information about latency and time
 function showText(text, duration) {
     text.style.visibility = "visible";
     text.innerHTML = `Latency: ${duration}ms`;
     setTimeout(() => { text.innerHTML = `Time: ${duration * 10}ms` }, durationCutter(duration) * 100);
 }
+// Function for creating final results
 function createResult(element, client, latency) {
     let time = latency / 10;
     let stars;
@@ -499,4 +442,68 @@ function createResult(element, client, latency) {
             </div>
         </div>
     `;
+}
+// Function for changing steps 
+function nextStep() {
+    switch (stepCounter) {
+        case 0: {
+            if (clientCounter == 0) {
+                servers[0].parentNode.style.display = "block";
+                for (const man of mans) {
+                    man.style.display = "none";
+                }
+                for (const device of devices) {
+                    device.style.display = "block";
+                }
+                for (const key in checkedClients) {
+                    checkedClients[key] = 3;
+                }
+            }
+            else {
+                servers[0].parentNode.style.display = "block";
+                for (const man of mans) {
+                    man.style.display = "none";
+                }
+            }
+            text1();
+            stepCounter++;
+            break;
+        }
+        case 1: {
+            if (serverCounter < 2) break;
+            for (const server of servers) {
+                if (server.firstElementChild.src.includes(circleEmptyPicture)) {
+                    server.style.display = "none"
+                }
+            }
+            text.style.visibility = "hidden";
+            byteCloudArcShow(checkedClients, checkedServers);
+            stepCounter++;
+            break;
+        }
+        case 2: {
+            arcHide(arcs);
+            for (const screen of screens) {
+                screen.style.transitionDuration = "0s"
+                screen.style.width = "0%";
+            }
+            for (const item of infoText) {
+                item.style.visibility = "hidden";
+            }
+            setTimeout(() => {
+                arcShow(checkedClients, checkedServers);
+            }, 1500)
+            stepCounter++;
+            break;
+        }
+        case 3: {
+            result.style.display = "block";
+            stepCounter++;
+            break;
+        }
+        default: {
+            break;
+        }
+    }
+
 }
