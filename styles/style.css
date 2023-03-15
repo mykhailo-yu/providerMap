@@ -3,13 +3,22 @@
   padding: 0;
   border: none;
   outline: none;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.wrapper {
+  position: relative;
 }
 .main {
   width: 80vw;
   margin: 0 auto;
 }
 .main .text {
+  margin-top: 10px;
   font-size: 2vw;
+  display: inline-block;
+  background-color: #bce4a2;
+  padding: 10px;
+  border-radius: 5px;
 }
 .map {
   position: relative;
@@ -212,7 +221,7 @@
 .info-text {
   display: none;
   position: absolute;
-  background-color: #8ad1d1;
+  background-color: #bce4a2;
   padding: 4px;
   border-radius: 4px;
 }
@@ -235,4 +244,79 @@
 .info-text_australia_ {
   top: 72%;
   left: 86%;
+}
+.result-table-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  width: 100vw;
+  min-height: 100vh;
+  overflow: hidden;
+  display: none;
+  z-index: 99;
+}
+.result-table-wrapper .text {
+  display: inline-block;
+  margin-top: 10px;
+  margin-left: 7%;
+  background-color: #bce4a2;
+  padding: 10px;
+  border-radius: 5px;
+}
+.result-table-inner {
+  width: 50%;
+  margin: 7% auto 0;
+  display: flex;
+  gap: 2%;
+}
+.result-table-inner h2 {
+  font-size: 2vw;
+  margin-bottom: 10px;
+}
+.result-table-inner .result-object {
+  flex-grow: 1;
+  text-align: center;
+}
+.result-table-inner .result-byteCloud {
+  flex-grow: 1;
+  text-align: center;
+}
+.result-table-inner .item {
+  background-color: #bce4a2;
+  display: flex;
+  flex-wrap: wrap;
+  border: 1px solid #000;
+  font-size: 0.9vw;
+  margin-bottom: 2%;
+}
+.result-table-inner .item .header {
+  width: 100%;
+  border-bottom: 1px solid #000;
+  font-weight: 800;
+  display: flex;
+  justify-content: space-between;
+  padding-left: 15%;
+}
+.result-table-inner .item .header .stars {
+  display: flex;
+}
+.result-table-inner .item .header img {
+  width: 20%;
+}
+.result-table-inner .item .result-main {
+  display: flex;
+  width: 100%;
+}
+.result-table-inner .item-cell {
+  padding: 10px;
+}
+.result-table-inner .item .latency {
+  border-right: 1px solid #000;
+}
+.result-table-inner .item .download-time {
+  border-right: 1px solid #000;
+}
+.result-table-inner .item .quality {
+  flex-grow: 1;
 }

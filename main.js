@@ -13,6 +13,9 @@ const infoTextSouthAmerica = document.querySelector(".info-text_southAmerica_");
 const infoTextEurope = document.querySelector(".info-text_europe_");
 const infoTextAustralia = document.querySelector(".info-text_australia_");
 const infoTextAsia = document.querySelector(".info-text_asia_");
+const result = document.querySelector(".result-table-wrapper");
+const resultByteCloud = document.querySelector(".result-byteCloud");
+const resultObject = document.querySelector(".result-object");
 const manEmptyPicture = "img/man_empty.png";
 const manFilledPicture = "img/man_filled.png";
 const circleEmptyPicture = "img/circle_empty.png";
@@ -26,8 +29,8 @@ let serverCounter = 0;
 let checkedClients = { "north-america_": 0, "south-america_": 0, "europe_": 0, "asia_": 0, "oceania_": 0 };
 let checkedServers = { "east-usa_": 0, "west-usa_": 0, "germany_": 0, "singapore_": 0 };
 let pings = {
-    "eu-eu": 19, "eu-na": 101, "eu-sa": 174, "eu-as": 296, "eu-au": 253,
-    "wna-na": 51, "wna-sa": 124, "wna-eu": 141, "wna-as": 143, "wna-au": 179,
+    "eu-eu": 19, "eu-na": 101, "eu-sa": 174, "eu-as": 143, "eu-au": 179,
+    "wna-na": 51, "wna-sa": 124, "wna-eu": 141, "wna-as": 296, "wna-au": 253,
     "ena-na": 21, "ena-sa": 139, "ena-eu": 97, "ena-as": 232, "ena-au": 207,
     "oc-na": 226, "oc-sa": 367, "oc-eu": 250, "oc-as": 70, "oc-au": 92
 }
@@ -171,6 +174,7 @@ function arcShow(clients, servers) {
             let device = document.querySelector(`.devices-${key}`);
             anim(device, 1, path);
             showText(text, path);
+            createResult(resultObject, key, path)
         }
         if (clients[key] == 2) {
             arcName.push(arcNameStart + key + "large");
@@ -178,6 +182,7 @@ function arcShow(clients, servers) {
             let device = document.querySelector(`.devices-${key}`);
             anim(device, 2, path);
             showText(text, path);
+            createResult(resultObject, key, path)
         }
         if (clients[key] == 3) {
             arcName.push(arcNameStart + key + "small");
@@ -186,115 +191,66 @@ function arcShow(clients, servers) {
             let device = document.querySelector(`.devices-${key}`);
             anim(device, 3, path);
             showText(text, path);
+            createResult(resultObject, key, path)
         }
-        console.log(path);
     }
     showArc(arcName);
+    setTimeout(() => { nextStep() }, 5500);
 }
 function byteCloudArcShow(clients, servers) {
+    function clientQuantitySelect(client, server, path) {
+        if (clients[client] == 1) {
+            createByteCloudArcName(client, 1, server);
+            let device = document.querySelector(`.devices-${client}`);
+            anim(device, 1, path);
+            createResult(resultByteCloud, client, path);
+        }
+        else if (clients[client] == 2) {
+            createByteCloudArcName(client, 2, server);
+            let device = document.querySelector(`.devices-${client}`);
+            anim(device, 2, path);
+            createResult(resultByteCloud, client, path);
+        }
+        else if (clients[client] == 3) {
+            createByteCloudArcName(client, 3, server);
+            let device = document.querySelector(`.devices-${client}`);
+            anim(device, 3, path);
+            createResult(resultByteCloud, client, path);
+        }
+    }
     for (const server in servers) {
         for (const client in clients) {
             if (server == "east-usa_" && servers[server] > 0 && client == "north-america_" && clients[client] > 0) {
                 let path = pings["ena-na"];
-                if (clients[client] == 1) {
-                    createByteCloudArcName(client, 1, server);
-                    let device = document.querySelector(`.devices-${client}`);
-                    anim(device, 1, path)
-                }
-                else if (clients[client] == 2) {
-                    createByteCloudArcName(client, 2, server);
-                    let device = document.querySelector(`.devices-${client}`);
-                    anim(device, 2, path)
-                }
-                else if (clients[client] == 3) {
-                    createByteCloudArcName(client, 3, server);
-                    let device = document.querySelector(`.devices-${client}`);
-                    anim(device, 3, path)
-                }
+                clientQuantitySelect(client, server, path);
                 infoTextNorthAmerica.style.display = "block"
                 infoTextNorthAmerica.innerHTML = `Latency: ${path}ms`;
                 setTimeout(() => { infoTextNorthAmerica.innerHTML = `Time: ${path * 10}ms` }, durationCutter(path) * 100);
             }
             else if (server == "west-usa_" && servers[server] > 0 && client == "south-america_" && clients[client] > 0) {
                 let path = pings["wna-sa"];
-                if (clients[client] == 1) {
-                    createByteCloudArcName(client, 1, server);
-                    let device = document.querySelector(`.devices-${client}`);
-                    anim(device, 1, path)
-                }
-                else if (clients[client] == 2) {
-                    createByteCloudArcName(client, 2, server);
-                    let device = document.querySelector(`.devices-${client}`);
-                    anim(device, 2, path)
-                }
-                else if (clients[client] == 3) {
-                    createByteCloudArcName(client, 3, server);
-                    let device = document.querySelector(`.devices-${client}`);
-                    anim(device, 3, path)
-                }
+                clientQuantitySelect(client, server, path);
                 infoTextSouthAmerica.style.display = "block"
                 infoTextSouthAmerica.innerHTML = `Latency: ${path}ms`;
                 setTimeout(() => { infoTextSouthAmerica.innerHTML = `Time: ${path * 10}ms` }, durationCutter(path) * 100);
             }
             else if (server == "germany_" && servers[server] > 0 && client == "europe_" && clients[client] > 0) {
                 let path = pings["eu-eu"];
-                if (clients[client] == 1) {
-                    createByteCloudArcName(client, 1, server);
-                    let device = document.querySelector(`.devices-${client}`);
-                    anim(device, 1, path)
-                }
-                else if (clients[client] == 2) {
-                    createByteCloudArcName(client, 2, server);
-                    let device = document.querySelector(`.devices-${client}`);
-                    anim(device, 2, path)
-                }
-                else if (clients[client] == 3) {
-                    createByteCloudArcName(client, 3, server);
-                    let device = document.querySelector(`.devices-${client}`);
-                    anim(device, 3, path)
-                }
+                clientQuantitySelect(client, server, path);
                 infoTextEurope.style.display = "block"
                 infoTextEurope.innerHTML = `Latency: ${path}ms`;
                 setTimeout(() => { infoTextEurope.innerHTML = `Time: ${path * 10}ms` }, durationCutter(path) * 100);
             }
             else if (server == "singapore_" && servers[server] > 0 && client == "asia_" && clients[client] > 0) {
                 let path = pings["oc-as"];
-                if (clients[client] == 1) {
-                    createByteCloudArcName(client, 1, server);
-                    let device = document.querySelector(`.devices-${client}`);
-                    anim(device, 1, path)
-                }
-                else if (clients[client] == 2) {
-                    createByteCloudArcName(client, 2, server);
-                    let device = document.querySelector(`.devices-${client}`);
-                    anim(device, 2, path)
-                }
-                else if (clients[client] == 3) {
-                    createByteCloudArcName(client, 3, server);
-                    let device = document.querySelector(`.devices-${client}`);
-                    anim(device, 3, path)
-                }
+                clientQuantitySelect(client, server, path);
                 infoTextAsia.style.display = "block"
                 infoTextAsia.innerHTML = `Latency: ${path}ms`;
                 setTimeout(() => { infoTextAsia.innerHTML = `Time: ${path * 10}ms` }, durationCutter(path) * 100);
             }
             else if (server == "singapore_" && servers[server] > 0 && client == "oceania_" && clients[client] > 0) {
                 let path = pings["oc-au"];
-                if (clients[client] == 1) {
-                    createByteCloudArcName(client, 1, server);
-                    let device = document.querySelector(`.devices-${client}`);
-                    anim(device, 1, path)
-                }
-                else if (clients[client] == 2) {
-                    createByteCloudArcName(client, 2, server);
-                    let device = document.querySelector(`.devices-${client}`);
-                    anim(device, 2, path)
-                }
-                else if (clients[client] == 3) {
-                    createByteCloudArcName(client, 3, server);
-                    let device = document.querySelector(`.devices-${client}`);
-                    anim(device, 3, path)
-                }
+                clientQuantitySelect(client, server, path);
                 infoTextAustralia.style.display = "block"
                 infoTextAustralia.innerHTML = `Latency: ${path}ms`;
                 setTimeout(() => { infoTextAustralia.innerHTML = `Time: ${path * 10}ms` }, durationCutter(path) * 100);
@@ -302,126 +258,35 @@ function byteCloudArcShow(clients, servers) {
             /*/////////////////////*/
             else if (server == "east-usa_" && servers[server] == 0 && servers["west-usa_"] > 0 && client == "north-america_" && clients[client] > 0) {
                 let path = pings["wna-na"];
-                if (clients[client] == 1) {
-                    createByteCloudArcName(client, 1, "west-usa_");
-                    let device = document.querySelector(`.devices-${client}`);
-                    anim(device, 1, path)
-                }
-                else if (clients[client] == 2) {
-                    createByteCloudArcName(client, 2, "west-usa_");
-                    let device = document.querySelector(`.devices-${client}`);
-                    anim(device, 2, path)
-                }
-                else if (clients[client] == 3) {
-                    createByteCloudArcName(client, 3, "west-usa_");
-                    let device = document.querySelector(`.devices-${client}`);
-                    anim(device, 3, path)
-                }
-                infoTextNorthAmerica.style.display = "block"
-                infoTextNorthAmerica.innerHTML = `Latency: ${path}ms`;
-                setTimeout(() => { infoTextNorthAmerica.innerHTML = `Time: ${path * 10}ms` }, durationCutter(path) * 100);
-            }
-            else if (server == "west-usa_" && servers[server] == 0 && servers["east-usa_"] > 0 && client == "north-america_" && clients[client] > 0) {
-                let path = pings["ena-na"];
-                if (clients[client] == 1) {
-                    createByteCloudArcName(client, 1, "east-usa_");
-                    let device = document.querySelector(`.devices-${client}`);
-                    anim(device, 1, path)
-                }
-                else if (clients[client] == 2) {
-                    createByteCloudArcName(client, 2, "east-usa_");
-                    let device = document.querySelector(`.devices-${client}`);
-                    anim(device, 2, path)
-                }
-                else if (clients[client] == 3) {
-                    createByteCloudArcName(client, 3, "east-usa_");
-                    let device = document.querySelector(`.devices-${client}`);
-                    anim(device, 3, path)
-                }
+                clientQuantitySelect(client, "west-usa_", path);
                 infoTextNorthAmerica.style.display = "block"
                 infoTextNorthAmerica.innerHTML = `Latency: ${path}ms`;
                 setTimeout(() => { infoTextNorthAmerica.innerHTML = `Time: ${path * 10}ms` }, durationCutter(path) * 100);
             }
             else if (server == "west-usa_" && servers[server] == 0 && servers["east-usa_"] > 0 && client == "south-america_" && clients[client] > 0) {
                 let path = pings["ena-sa"];
-                if (clients[client] == 1) {
-                    createByteCloudArcName(client, 1, "east-usa_");
-                    let device = document.querySelector(`.devices-${client}`);
-                    anim(device, 1, path)
-                }
-                else if (clients[client] == 2) {
-                    createByteCloudArcName(client, 2, "east-usa_");
-                    let device = document.querySelector(`.devices-${client}`);
-                    anim(device, 2, path)
-                }
-                else if (clients[client] == 3) {
-                    createByteCloudArcName(client, 3, "east-usa_");
-                    let device = document.querySelector(`.devices-${client}`);
-                    anim(device, 3, path)
-                }
+                clientQuantitySelect(client, "east-usa_", path);
                 infoTextSouthAmerica.style.display = "block"
                 infoTextSouthAmerica.innerHTML = `Latency: ${path}ms`;
                 setTimeout(() => { infoTextSouthAmerica.innerHTML = `Time: ${path * 10}ms` }, durationCutter(path) * 100);
             }
-            else if (server == "germany_" && servers[server] == 0 && servers["singapore_"] > 0 && client == "europe_" && clients[client] > 0) {
-                let path = pings["oc-eu"];
-                if (clients[client] == 1) {
-                    createByteCloudArcName(client, 1, "singapore_");
-                    let device = document.querySelector(`.devices-${client}`);
-                    anim(device, 1, path)
-                }
-                else if (clients[client] == 2) {
-                    createByteCloudArcName(client, 2, "singapore_");
-                    let device = document.querySelector(`.devices-${client}`);
-                    anim(device, 2, path)
-                }
-                else if (clients[client] == 3) {
-                    createByteCloudArcName(client, 3, "singapore_");
-                    let device = document.querySelector(`.devices-${client}`);
-                    anim(device, 3, path)
-                }
+            else if (server == "germany_" && servers[server] == 0 && servers["east-usa_"] > 0 && client == "europe_" && clients[client] > 0) {
+                let path = pings["ena-eu"];
+                clientQuantitySelect(client, "east-usa_", path);
                 infoTextEurope.style.display = "block"
                 infoTextEurope.innerHTML = `Latency: ${path}ms`;
                 setTimeout(() => { infoTextEurope.innerHTML = `Time: ${path * 10}ms` }, durationCutter(path) * 100);
             }
             else if (server == "singapore_" && servers[server] == 0 && servers["germany_"] > 0 && client == "oceania_" && clients[client] > 0) {
                 let path = pings["eu-au"];
-                if (clients[client] == 1) {
-                    createByteCloudArcName(client, 1, "germany_");
-                    let device = document.querySelector(`.devices-${client}`);
-                    anim(device, 1, path)
-                }
-                else if (clients[client] == 2) {
-                    createByteCloudArcName(client, 2, "germany_");
-                    let device = document.querySelector(`.devices-${client}`);
-                    anim(device, 2, path)
-                }
-                else if (clients[client] == 3) {
-                    createByteCloudArcName(client, 3, "germany_");
-                    let device = document.querySelector(`.devices-${client}`);
-                    anim(device, 3, path)
-                }
+                clientQuantitySelect(client, "germany_", path);
                 infoTextAustralia.style.display = "block"
                 infoTextAustralia.innerHTML = `Latency: ${path}ms`;
                 setTimeout(() => { infoTextAustralia.innerHTML = `Time: ${path * 10}ms` }, durationCutter(path) * 100);
             }
             else if (server == "singapore_" && servers[server] == 0 && servers["germany_"] > 0 && client == "asia_" && clients[client] > 0) {
                 let path = pings["eu-as"];
-                if (clients[client] == 1) {
-                    createByteCloudArcName(client, 1, "germany_");
-                    let device = document.querySelector(`.devices-${client}`);
-                    anim(device, 1, path)
-                }
-                else if (clients[client] == 2) {
-                    createByteCloudArcName(client, 2, "germany_");
-                    let device = document.querySelector(`.devices-${client}`);
-                    anim(device, 2, path)
-                }
-                else if (clients[client] == 3) {
-                    createByteCloudArcName(client, 3, "germany_");
-                    let device = document.querySelector(`.devices-${client}`);
-                    anim(device, 3, path)
-                }
+                clientQuantitySelect(client, "germany_", path);
                 infoTextAsia.style.display = "block"
                 infoTextAsia.innerHTML = `Latency: ${path}ms`;
                 setTimeout(() => { infoTextAsia.innerHTML = `Time: ${path * 10}ms` }, durationCutter(path) * 100);
@@ -469,7 +334,6 @@ function anim(element, quantity, duration) {
         case 1: {
             small.style.transitionDuration = `${duration / 10}s`;
             small.style.width = "33%";
-            console.log(duration)
             break;
         }
         case 2: {
@@ -477,7 +341,6 @@ function anim(element, quantity, duration) {
             small.style.width = "33%";
             medium.style.transitionDuration = `${duration / 10}s`;
             medium.style.width = "49%";
-            console.log(duration)
             break;
         }
         case 3: {
@@ -487,7 +350,6 @@ function anim(element, quantity, duration) {
             medium.style.width = "49%";
             large.style.transitionDuration = `${duration / 10}s`;
             large.style.width = "78%";
-            console.log(duration)
             break;
         }
         default: break;
@@ -552,6 +414,11 @@ function nextStep() {
             stepCounter++;
             break;
         }
+        case 3: {
+            result.style.display = "block";
+            stepCounter++;
+            break;
+        }
         default: {
             break;
         }
@@ -562,4 +429,74 @@ function showText(text, duration) {
     text.style.visibility = "visible";
     text.innerHTML = `Latency: ${duration}ms`;
     setTimeout(() => { text.innerHTML = `Time: ${duration * 10}ms` }, durationCutter(duration) * 100);
+}
+function createResult(element, client, latency) {
+    let time = latency / 10;
+    let stars;
+    let quality;
+    if (client == "north-america_") client = "North America";
+    else if (client == "south-america_") client = "South America";
+    else if (client == "europe_") client = "Europe";
+    else if (client == "asia_") client = "Asia";
+    else if (client == "oceania_") client = "Oceania";
+
+    if (latency < 50) {
+        stars = `<img src="img/star.svg" alt="star">
+                    <img src="img/star.svg" alt="star">
+                    <img src="img/star.svg" alt="star">
+                    <img src="img/star.svg" alt="star">
+                    <img src="img/star.svg" alt="star">`;
+        quality = "4K/2160p Ultra HD";
+    }
+    else if (latency < 100 && latency >= 50) {
+        stars = `<img src="img/star2.svg" alt="star">
+                    <img src="img/star.svg" alt="star">
+                    <img src="img/star.svg" alt="star">
+                    <img src="img/star.svg" alt="star">
+                    <img src="img/star.svg" alt="star">`;
+        quality = "1080p Full HD";
+    }
+    else if (latency < 150 && latency >= 100) {
+        stars = `<img src="img/star2.svg" alt="star">
+                    <img src="img/star2.svg" alt="star">
+                    <img src="img/star.svg" alt="star">
+                    <img src="img/star.svg" alt="star">
+                    <img src="img/star.svg" alt="star">`;
+        quality = "1080p Full HD";
+    }
+    else if (latency < 200 && latency >= 150) {
+        stars = `<img src="img/star2.svg" alt="star">
+                    <img src="img/star2.svg" alt="star">
+                    <img src="img/star2.svg" alt="star">
+                    <img src="img/star.svg" alt="star">
+                    <img src="img/star.svg" alt="star">`;
+        quality = "720p HD";
+    }
+    else {
+        stars = `<img src="img/star2.svg" alt="star">
+                    <img src="img/star2.svg" alt="star">
+                    <img src="img/star2.svg" alt="star">
+                    <img src="img/star.svg" alt="star">
+                    <img src="img/star.svg" alt="star">`;
+        quality = "480p";
+    }
+
+    element.innerHTML += `
+        <div class="item">
+            <div class="item-cell header">${client}
+                <div class="stars">
+                    ${stars}
+                </div>
+            </div>
+            <div class="result-main">
+                <div class="item-cell latency">Latency <p>${latency}</p>
+                </div>
+                <div class="item-cell download-time">Download time <p>${time}sec</p><span
+                        class="time"></span>
+                </div>
+                <div class="item-cell quality">Video Streaming <p>${quality}</p>
+                </div>
+            </div>
+        </div>
+    `;
 }

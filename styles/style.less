@@ -3,15 +3,24 @@
     padding: 0;
     border: none;
     outline: none;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
+.wrapper {
+    position: relative;
+}
 
 .main {
     width: 80vw;
     margin: 0 auto;
 
     .text {
+        margin-top: 10px;
         font-size: 2vw;
+        display: inline-block;
+        background-color: rgb(188, 228, 162);
+        padding: 10px;
+        border-radius: 5px;
     }
 }
 
@@ -284,8 +293,7 @@
 .info-text {
     display: none;
     position: absolute;
-    //width: 5%;
-    background-color: rgb(138, 209, 209);
+    background-color: rgb(188, 228, 162);
     padding: 4px;
     border-radius: 4px;
 
@@ -312,5 +320,96 @@
     &_australia_ {
         top: 72%;
         left: 86%;
+    }
+}
+
+.result-table-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    width: 100vw;
+    min-height: 100vh;
+    overflow: hidden;
+    display: none;
+    z-index: 99;
+
+    .text {
+        display: inline-block;
+        margin-top: 10px;
+        margin-left: 7%;
+        background-color: rgb(188, 228, 162);
+        padding: 10px;
+        border-radius: 5px;
+    }
+}
+
+.result-table-inner {
+    width: 50%;
+    margin: 7% auto 0;
+    display: flex;
+    gap: 2%;
+
+    h2 {
+        font-size: 2vw;
+        margin-bottom: 10px;
+    }
+
+    .result-object {
+        flex-grow: 1;
+        text-align: center;
+    }
+
+    .result-byteCloud {
+        flex-grow: 1;
+        text-align: center;
+    }
+
+    .item {
+        background-color: rgb(188, 228, 162);
+        display: flex;
+        flex-wrap: wrap;
+        border: 1px solid #000;
+        font-size: 0.9vw;
+        margin-bottom: 2%;
+
+        .header {
+            width: 100%;
+            border-bottom: 1px solid #000;
+            font-weight: 800;
+            display: flex;
+            justify-content: space-between;
+            padding-left: 15%;
+
+            .stars {
+                display: flex;
+            }
+
+            img {
+                width: 20%;
+            }
+        }
+
+        .result-main {
+            display: flex;
+            width: 100%;
+        }
+
+        &-cell {
+            padding: 10px;
+        }
+
+        .latency {
+            border-right: 1px solid #000;
+        }
+
+        .download-time {
+            border-right: 1px solid #000;
+        }
+
+        .quality {
+            flex-grow: 1;
+        }
+
     }
 }
