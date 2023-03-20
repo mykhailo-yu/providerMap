@@ -13,6 +13,7 @@ const infoTextSouthAmerica = document.querySelector(".info-text_southAmerica_");
 const infoTextEurope = document.querySelector(".info-text_europe_");
 const infoTextAustralia = document.querySelector(".info-text_australia_");
 const infoTextAsia = document.querySelector(".info-text_asia_");
+const wrapper = document.querySelector(".wrapper")
 const result = document.querySelector(".result-table-wrapper");
 const resultByteCloud = document.querySelector(".result-byteCloud");
 const resultObject = document.querySelector(".result-object");
@@ -22,6 +23,14 @@ const circleEmptyPicture = "img/circle_empty.png";
 const circleFilledPicture = "img/circle_filled.png";
 const serverPicture = "img/server.png";
 const serverByteCloudPicture = "img/server_ByteCloud.png";
+window.addEventListener("resize", () => {
+    if (window.innerHeight < result.scrollHeight) {
+        wrapper.style.height = "initial";
+
+    } else {
+        wrapper.style.height = "100vh";
+    }
+})
 let ifFirstServerChecked = false;
 let clientCounter = 0;
 let stepCounter = 0;
@@ -34,6 +43,24 @@ let pings = {
     "ena-na": 21, "ena-sa": 139, "ena-eu": 97, "ena-as": 232, "ena-au": 207,
     "oc-na": 226, "oc-sa": 367, "oc-eu": 250, "oc-as": 70, "oc-au": 92
 }
+// Create an object with animation durations
+let animTime = {
+    "eu-eu": 0, "eu-na": 0, "eu-sa": 0, "eu-as": 0, "eu-au": 0,
+    "wna-na": 0, "wna-sa": 0, "wna-eu": 0, "wna-as": 0, "wna-au": 0,
+    "ena-na": 0, "ena-sa": 0, "ena-eu": 0, "ena-as": 0, "ena-au": 0,
+    "oc-na": 0, "oc-sa": 0, "oc-eu": 0, "oc-as": 0, "oc-au": 0
+}
+// Compute the animation durations for animTime object in which the animation speed is proportional to the highest ping, but no longer than 10 seconds
+function computeAnimTime(object) {
+    // Finding biggest ping key
+    const maxValue = Math.max.apply(null, Object.values(object))
+    let maxNumber = Object.keys(object).filter(k => object[k] === maxValue);
+    animTime[maxNumber] = 10;
+    for (const key in object) {
+        animTime[key] = pings[key] * 10 / pings[maxNumber];
+    }
+}
+computeAnimTime(pings);
 let text1 = () => { text.innerHTML = "Where is your data? Choose one spot for Object Storage System"; }
 let text2 = () => {
     text.innerHTML = "Choose minimum two additional spots for ByteCloud and press <a class='startLink' onclick='nextStep()' style='color: rgb(98, 155, 240);'>Start</a>";
@@ -137,6 +164,7 @@ function arcShow(clients, servers) {
     let arcNameStart = "arc_";
     let arcName = [];
     let pathStart;
+    let waitingTime = 0;
     for (const key in servers) {
         if (servers[key] == 2) {
             arcNameStart += key;
@@ -149,39 +177,47 @@ function arcShow(clients, servers) {
     let text;
     for (const key in clients) {
         let path;
+        let aTime;
         if (key == "north-america_") {
             path = pings[pathStart + "na"];
+            aTime = animTime[pathStart + "na"];
             text = infoTextNorthAmerica;
         }
         else if (key == "south-america_") {
             path = pings[pathStart + "sa"];
+            aTime = animTime[pathStart + "sa"];
             text = infoTextSouthAmerica;
         }
         else if (key == "europe_") {
             path = pings[pathStart + "eu"];
+            aTime = animTime[pathStart + "eu"];
             text = infoTextEurope;
         }
         else if (key == "asia_") {
             path = pings[pathStart + "as"];
+            aTime = animTime[pathStart + "as"];
             text = infoTextAsia;
         }
         else if (key == "oceania_") {
             path = pings[pathStart + "au"];
+            aTime = animTime[pathStart + "au"];
             text = infoTextAustralia;
         }
         if (clients[key] == 1) {
             arcName.push(arcNameStart + key + "large");
             let device = document.querySelector(`.devices-${key}`);
-            anim(device, 1, path);
-            showText(text, path);
+            anim(device, 1, aTime);
+            waitTime(aTime);
+            showText(text, path, aTime);
             createResult(resultObject, key, path)
         }
         if (clients[key] == 2) {
             arcName.push(arcNameStart + key + "large");
             arcName.push(arcNameStart + key + "medium");
             let device = document.querySelector(`.devices-${key}`);
-            anim(device, 2, path);
-            showText(text, path);
+            anim(device, 2, aTime);
+            waitTime(aTime);
+            showText(text, path, aTime);
             createResult(resultObject, key, path)
         }
         if (clients[key] == 3) {
@@ -189,33 +225,41 @@ function arcShow(clients, servers) {
             arcName.push(arcNameStart + key + "medium");
             arcName.push(arcNameStart + key + "large");
             let device = document.querySelector(`.devices-${key}`);
-            anim(device, 3, path);
-            showText(text, path);
+            anim(device, 3, aTime);
+            waitTime(aTime);
+            showText(text, path, aTime);
             createResult(resultObject, key, path)
         }
     }
+    function waitTime(time) {
+        if (time * 1000 + 2000 > waitingTime) waitingTime = time * 1000 + 2000;
+    }
     showArc(arcName);
-    setTimeout(() => { nextStep() }, 5500);
+    setTimeout(() => { nextStep() }, waitingTime); // Waiting for end of all animation for object storage
 }
 // Function to calculate name elements for arcs and to create results for Byte Cloud storage
 function byteCloudArcShow(clients, servers) {
-    function clientQuantitySelect(client, server, path) {
+    let waitingTime = 0;
+    function waitTime(time) {
+        if (time * 1000 + 2000 > waitingTime) waitingTime = time * 1000 + 2000;
+    }
+    function clientQuantitySelect(client, server, path, aTime) {
         if (clients[client] == 1) {
             createByteCloudArcName(client, 1, server);
             let device = document.querySelector(`.devices-${client}`);
-            anim(device, 1, path);
+            anim(device, 1, aTime);
             createResult(resultByteCloud, client, path);
         }
         else if (clients[client] == 2) {
             createByteCloudArcName(client, 2, server);
             let device = document.querySelector(`.devices-${client}`);
-            anim(device, 2, path);
+            anim(device, 2, aTime);
             createResult(resultByteCloud, client, path);
         }
         else if (clients[client] == 3) {
             createByteCloudArcName(client, 3, server);
             let device = document.querySelector(`.devices-${client}`);
-            anim(device, 3, path);
+            anim(device, 3, aTime);
             createResult(resultByteCloud, client, path);
         }
     }
@@ -223,78 +267,98 @@ function byteCloudArcShow(clients, servers) {
         for (const client in clients) {
             if (server == "east-usa_" && servers[server] > 0 && client == "north-america_" && clients[client] > 0) {
                 let path = pings["ena-na"];
-                clientQuantitySelect(client, server, path);
+                let aTime = animTime["ena-na"];
+                waitTime(aTime);
+                clientQuantitySelect(client, server, path, aTime);
                 infoTextNorthAmerica.style.display = "block"
                 infoTextNorthAmerica.innerHTML = `Latency: ${path}ms`;
-                setTimeout(() => { infoTextNorthAmerica.innerHTML = `Time: ${path / 10}s` }, durationCutter(path) * 100);
+                setTimeout(() => { infoTextNorthAmerica.innerHTML = `Time: ${path / 10}s` }, aTime * 1000);
             }
             else if (server == "west-usa_" && servers[server] > 0 && client == "south-america_" && clients[client] > 0) {
                 let path = pings["wna-sa"];
-                clientQuantitySelect(client, server, path);
+                let aTime = animTime["wna-sa"];
+                waitTime(aTime);
+                clientQuantitySelect(client, server, path, aTime);
                 infoTextSouthAmerica.style.display = "block"
                 infoTextSouthAmerica.innerHTML = `Latency: ${path}ms`;
-                setTimeout(() => { infoTextSouthAmerica.innerHTML = `Time: ${path / 10}s` }, durationCutter(path) * 100);
+                setTimeout(() => { infoTextSouthAmerica.innerHTML = `Time: ${path / 10}s` }, aTime * 1000);
             }
             else if (server == "germany_" && servers[server] > 0 && client == "europe_" && clients[client] > 0) {
                 let path = pings["eu-eu"];
-                clientQuantitySelect(client, server, path);
+                let aTime = animTime["eu-eu"];
+                waitTime(aTime);
+                clientQuantitySelect(client, server, path, aTime);
                 infoTextEurope.style.display = "block"
                 infoTextEurope.innerHTML = `Latency: ${path}ms`;
-                setTimeout(() => { infoTextEurope.innerHTML = `Time: ${path / 10}s` }, durationCutter(path) * 100);
+                setTimeout(() => { infoTextEurope.innerHTML = `Time: ${path / 10}s` }, aTime * 1000);
             }
             else if (server == "singapore_" && servers[server] > 0 && client == "asia_" && clients[client] > 0) {
                 let path = pings["oc-as"];
-                clientQuantitySelect(client, server, path);
+                let aTime = animTime["oc-as"];
+                waitTime(aTime);
+                clientQuantitySelect(client, server, path, aTime);
                 infoTextAsia.style.display = "block"
                 infoTextAsia.innerHTML = `Latency: ${path}ms`;
-                setTimeout(() => { infoTextAsia.innerHTML = `Time: ${path / 10}s` }, durationCutter(path) * 100);
+                setTimeout(() => { infoTextAsia.innerHTML = `Time: ${path / 10}s` }, aTime * 1000);
             }
             else if (server == "singapore_" && servers[server] > 0 && client == "oceania_" && clients[client] > 0) {
                 let path = pings["oc-au"];
-                clientQuantitySelect(client, server, path);
+                let aTime = animTime["oc-au"];
+                waitTime(aTime);
+                clientQuantitySelect(client, server, path, aTime);
                 infoTextAustralia.style.display = "block"
                 infoTextAustralia.innerHTML = `Latency: ${path}ms`;
-                setTimeout(() => { infoTextAustralia.innerHTML = `Time: ${path / 10}s` }, durationCutter(path) * 100);
+                setTimeout(() => { infoTextAustralia.innerHTML = `Time: ${path / 10}s` }, aTime * 1000);
             }
             /*/////////////////////*/
             else if (server == "east-usa_" && servers[server] == 0 && servers["west-usa_"] > 0 && client == "north-america_" && clients[client] > 0) {
                 let path = pings["wna-na"];
-                clientQuantitySelect(client, "west-usa_", path);
+                let aTime = animTime["wna-na"];
+                waitTime(aTime);
+                clientQuantitySelect(client, "west-usa_", path, aTime);
                 infoTextNorthAmerica.style.display = "block"
                 infoTextNorthAmerica.innerHTML = `Latency: ${path}ms`;
-                setTimeout(() => { infoTextNorthAmerica.innerHTML = `Time: ${path / 10}s` }, durationCutter(path) * 100);
+                setTimeout(() => { infoTextNorthAmerica.innerHTML = `Time: ${path / 10}s` }, aTime * 1000);
             }
             else if (server == "west-usa_" && servers[server] == 0 && servers["east-usa_"] > 0 && client == "south-america_" && clients[client] > 0) {
                 let path = pings["ena-sa"];
-                clientQuantitySelect(client, "east-usa_", path);
+                let aTime = animTime["ena-sa"];
+                waitTime(aTime);
+                clientQuantitySelect(client, "east-usa_", path, aTime);
                 infoTextSouthAmerica.style.display = "block"
                 infoTextSouthAmerica.innerHTML = `Latency: ${path}ms`;
-                setTimeout(() => { infoTextSouthAmerica.innerHTML = `Time: ${path / 10}s` }, durationCutter(path) * 100);
+                setTimeout(() => { infoTextSouthAmerica.innerHTML = `Time: ${path / 10}s` }, aTime * 1000);
             }
             else if (server == "germany_" && servers[server] == 0 && servers["east-usa_"] > 0 && client == "europe_" && clients[client] > 0) {
                 let path = pings["ena-eu"];
-                clientQuantitySelect(client, "east-usa_", path);
+                let aTime = animTime["ena-eu"];
+                waitTime(aTime);
+                clientQuantitySelect(client, "east-usa_", path, aTime);
                 infoTextEurope.style.display = "block"
                 infoTextEurope.innerHTML = `Latency: ${path}ms`;
-                setTimeout(() => { infoTextEurope.innerHTML = `Time: ${path / 10}s` }, durationCutter(path) * 100);
+                setTimeout(() => { infoTextEurope.innerHTML = `Time: ${path / 10}s` }, aTime * 1000);
             }
             else if (server == "singapore_" && servers[server] == 0 && servers["germany_"] > 0 && client == "oceania_" && clients[client] > 0) {
                 let path = pings["eu-au"];
-                clientQuantitySelect(client, "germany_", path);
+                let aTime = animTime["eu-au"];
+                waitTime(aTime);
+                clientQuantitySelect(client, "germany_", path, aTime);
                 infoTextAustralia.style.display = "block"
                 infoTextAustralia.innerHTML = `Latency: ${path}ms`;
-                setTimeout(() => { infoTextAustralia.innerHTML = `Time: ${path / 10}s` }, durationCutter(path) * 100);
+                setTimeout(() => { infoTextAustralia.innerHTML = `Time: ${path / 10}s` }, aTime * 1000);
             }
             else if (server == "singapore_" && servers[server] == 0 && servers["germany_"] > 0 && client == "asia_" && clients[client] > 0) {
                 let path = pings["eu-as"];
-                clientQuantitySelect(client, "germany_", path);
+                let aTime = animTime["eu-as"];
+                waitTime(aTime);
+                clientQuantitySelect(client, "germany_", path, aTime);
                 infoTextAsia.style.display = "block"
                 infoTextAsia.innerHTML = `Latency: ${path}ms`;
-                setTimeout(() => { infoTextAsia.innerHTML = `Time: ${path / 10}s` }, durationCutter(path) * 100);
+                setTimeout(() => { infoTextAsia.innerHTML = `Time: ${path / 10}s` }, aTime * 1000);
             }
         }
     }
-    setTimeout(() => { nextStep() }, 5500);
+    setTimeout(() => { nextStep() }, waitingTime); // Waiting for end of all animations for ByteCloud servers
 }
 // Function to make visible the required arcs
 function showArc(arcName) {
@@ -334,43 +398,42 @@ function anim(element, quantity, duration) {
     let small = element.querySelector('.device-small .screen')
     let medium = element.querySelector('.device-medium .screen')
     let large = element.querySelector('.device-large .screen')
-    duration = durationCutter(duration);
+    duration = durationMagnifier(duration);
     switch (quantity) {
         case 1: {
-            small.style.transitionDuration = `${duration / 10}s`;
+            small.style.transitionDuration = `${duration}s`;
             small.style.width = "33%";
             break;
         }
         case 2: {
-            small.style.transitionDuration = `${duration / 10}s`;
+            small.style.transitionDuration = `${duration}s`;
             small.style.width = "33%";
-            medium.style.transitionDuration = `${duration / 10}s`;
+            medium.style.transitionDuration = `${duration}s`;
             medium.style.width = "49%";
             break;
         }
         case 3: {
-            small.style.transitionDuration = `${duration / 10}s`;
+            small.style.transitionDuration = `${duration}s`;
             small.style.width = "33%";
-            medium.style.transitionDuration = `${duration / 10}s`;
+            medium.style.transitionDuration = `${duration}s`;
             medium.style.width = "49%";
-            large.style.transitionDuration = `${duration / 10}s`;
+            large.style.transitionDuration = `${duration}s`;
             large.style.width = "78%";
             break;
         }
         default: break;
     }
 }
-// Function to decrease duration of animation if it is big, and to increase duration if it is short
-function durationCutter(duration) {
-    if (duration > 50) return 50;
-    else if (duration < 10) return 10;
+// Function to increase duration if it is shorter than 2 seconds
+function durationMagnifier(duration) {
+    if (duration < 2) return 2;
     else return duration;
 }
 // Function to make visible text with information about latency and time
-function showText(text, duration) {
+function showText(text, path, aTime) {
     text.style.visibility = "visible";
-    text.innerHTML = `Latency: ${duration}ms`;
-    setTimeout(() => { text.innerHTML = `Time: ${duration / 10}s` }, durationCutter(duration) * 100);
+    text.innerHTML = `Latency: ${path}ms`;
+    setTimeout(() => { text.innerHTML = `Time: ${path / 10}s` }, aTime * 1000);
 }
 // Function for creating final results
 function createResult(element, client, latency) {
@@ -492,12 +555,18 @@ function nextStep() {
             }
             setTimeout(() => {
                 arcShow(checkedClients, checkedServers);
-            }, 1500)
+            }, 1500) // Time beetween ByteCloud animation and object storage animation
             stepCounter++;
             break;
         }
         case 3: {
             result.style.display = "block";
+            if (window.innerHeight < result.scrollHeight) {
+                wrapper.style.height = "initial";
+
+            } else {
+                wrapper.style.height = "100vh";
+            }
             stepCounter++;
             break;
         }
